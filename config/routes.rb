@@ -1,4 +1,13 @@
 MyApp::Application.routes.draw do
+  resources :users
+
+
+  get "users/create"
+
+  get "users/new"
+
+  get "users/edit"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
