@@ -1,0 +1,28 @@
+%p#notice= notice
+
+%h2= @story.title
+%p
+  %b State:
+  = @story.state
+%p
+  %b Assigned to:
+  = @story.username
+
+%table.table-striped{:width=>"100%"}
+  - @story.comments.each do |comment|
+    %tr
+      %td
+        %small
+          %p.pull-right
+            %em= comment.user.name
+            on
+            = comment.created_at_str
+
+        %p= comment.text
+
+= simple_form_for @comment, :html=>{:class=>"form-inline"} do |f|
+  = f.input :text, :as=>:text, :label=>false, :input_html => {:cols => 100, :rows=>5, :style=>"width: 100%;"}
+  = f.button :submit
+
+
+= link_to 'Edit', edit_story_path(@story)

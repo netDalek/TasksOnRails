@@ -1,16 +1,11 @@
 MyApp::Application.routes.draw do
-  get "session/new"
 
-  get "session/create"
-
-  get "session/destroy"
-
-  resources :users, only: [:new, :create, :edit]
+  resources :users, :only => [:new, :create, :edit]
 
   resources :stories do
     member do
       get 'change_state/:event' => :change_state
-      resources :comments
+      resources :comments, :only => [:create]
     end
   end
 

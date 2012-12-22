@@ -1,0 +1,31 @@
+= params.inspect
+
+= link_to 'New Story', new_story_path, :class=>"btn pull-right"
+%h1 User Stories
+
+%h4 Filters
+= form_tag stories_path, method: :get, :class=>"form-vertical" do
+  %p
+    Assigned to
+    = select_tag "user_id", options_from_collection_for_select(@users, "id", "name", params[:user_id]), :include_blank => true, :disabled => params[:not_assigned]
+    = check_box_tag "not_assigned", "true", params[:not_assigned]
+    Not Assigned
+  %p
+    Status
+    = select_tag "state", options_from_collection_for_select(Story.state_machine.states, "name", "name", params[:state]), :include_blank => true
+  = submit_tag "Filter"
+  = submit_tag "Reset"
+
+
+%table.table-striped{:width=>"100%"}
+  %tr
+    %th Title
+    %th Created at
+    %th Assigned to
+    %th{width:"200px"} Status
+  - @stories.each do |story|
+    %tr
+      %td= link_to story.title, story_path(story)
+      %td= story.created_at_str
+      %td= story.username
+      %td{align: "center"}= render :partial => "events", :locals => {:@story => story}
