@@ -1,12 +1,26 @@
 MyApp::Application.routes.draw do
-  resources :users
+  get "session/new"
 
+  get "session/create"
 
-  get "users/create"
+  get "session/destroy"
 
-  get "users/new"
+  resources :users, only: [:new, :create, :edit]
 
-  get "users/edit"
+  resources :stories do
+    member do
+      get 'change_state/:event' => :change_state
+      resources :comments
+    end
+  end
+
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    delete 'logout' => :destroy
+  end
+
+  root :to => 'stories#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

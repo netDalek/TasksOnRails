@@ -18,37 +18,20 @@
 
 
   %body
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          %a.brand(href="#") MyApp
-          .container.nav-collapse
-            %ul.nav
-              %li= link_to "Link 1", "/path1"
-              %li= link_to "Link 2", "/path2"
-              %li= link_to "Link 3", "/path3"
+    %div.navbar
+      %div.navbar-inner
+        %div.container
+          %a
+            = link_to "Tasks on Rails", root_path, class: "brand"
+          %ul.nav.pull-right
+            - if session[:user_id]
+              %li
+                = link_to "Logged as #{session[:user_name]}", edit_user_path(session[:user_id])
+              %li
+                = button_to 'Logout', logout_path, :method=>:delete, :form_class=>"navbar-form"
 
-    .container
-
-      .row
-        .span9
-          = bootstrap_flash
-          = yield
-        .span3
-          .well.sidebar-nav
-            %h3 Sidebar
-            %ul.nav.nav-list
-              %li.nav-header Sidebar
-              %li= link_to "Link 1", "/path1"
-              %li= link_to "Link 2", "/path2"
-              %li= link_to "Link 3", "/path3"
-    
-      %footer
-        %p &copy; Company 2012
+    %div.container
+      = yield
     /
       Javascripts
       \==================================================
