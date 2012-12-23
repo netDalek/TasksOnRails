@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   def create
+    logger.debug params.inspect
     @story = Story.find(params[:id])
     @comment = @story.comments.new(params[:comment])
     @comment.user_id = session[:user_id]

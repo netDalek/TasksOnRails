@@ -6,16 +6,16 @@ class StoriesController < ApplicationController
   def index
     #params[:user_id] = nil if params[:user_id].to_i < 0
     if params[:commit] == "Filter"
-      @stories = apply_scopes(Story).order "created_at desc"
+      @stories = apply_scopes(Story).includes(:user).order "created_at desc"
     else
-      @stories = Story.all
+      @stories = Story.includes(:user).all
       params.clear
     end
     @users = User.all
   end
 
   def show
-    @story = Story.find(params[:id])
+    @story = Story.includes(:user).find(params[:id])
     @comment = Comment.new
   end
 
