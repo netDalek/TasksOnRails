@@ -26,7 +26,7 @@
           %ul.nav.pull-right
             - if session[:user_id]
               %li
-                = link_to "Logged as #{session[:user_name]}", edit_user_path(session[:user_id])
+                = link_to "Logged as #{User.find(session[:user_id]).name}", edit_user_path(session[:user_id])
               %li
                 = button_to 'Logout', logout_path, :method=>:delete, :form_class=>"navbar-form"
 

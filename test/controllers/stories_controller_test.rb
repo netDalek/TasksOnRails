@@ -4,7 +4,7 @@ class StoriesControllerTest < MiniTest::Rails::ActionController::TestCase
 
   before do
     @story = stories(:one)
-    session[:user_id] = 1
+    session[:user_id] = users(:one).id
   end
 
   def test_index
