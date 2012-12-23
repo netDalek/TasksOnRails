@@ -1,19 +1,20 @@
 require "minitest_helper"
 
-class SessionControllerTest < MiniTest::Rails::ActionController::TestCase
-  test "should get new" do
+class SessionsControllerTest < MiniTest::Rails::ActionController::TestCase
+
+  def test_new
     get :new
     assert_response :success
   end
 
-  test "should get create" do
-    get :create
+  def test_create
+    post :create
     assert_response :success
   end
 
-  test "should get destroy" do
-    get :destroy
-    assert_response :success
+  def test_destroy
+    delete :destroy
+    assert_redirected_to root_path
   end
 
 end

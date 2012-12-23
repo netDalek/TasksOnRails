@@ -2,11 +2,12 @@
 # http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
+  id: 1
   title: MyString
-  state: MyString
+  state: created
   user_id: 1
 
 two:
   title: MyString
-  state: MyString
+  state: created
   user_id: 1

@@ -1,6 +1,6 @@
 MyApp::Application.routes.draw do
 
-  resources :users, :only => [:new, :create, :edit]
+  resources :users, :only => [:new, :create, :edit, :update]
 
   resources :stories do
     member do

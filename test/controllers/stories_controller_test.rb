@@ -4,10 +4,11 @@ class StoriesControllerTest < MiniTest::Rails::ActionController::TestCase
 
   before do
     @story = stories(:one)
+    session[:user_id] = 1
   end
 
   def test_index
-    get :index
+    get :index, nil
     assert_response :success
     assert_not_nil assigns(:stories)
   end
@@ -19,10 +20,10 @@ class StoriesControllerTest < MiniTest::Rails::ActionController::TestCase
 
   def test_create
     assert_difference('Story.count') do
-      post :create, story: {  }
+      post :create, story: { title: "title" }
     end
 
-    assert_redirected_to story_path(assigns(:story))
+    assert_redirected_to stories_path
   end
 
   def test_show
@@ -36,7 +37,7 @@ class StoriesControllerTest < MiniTest::Rails::ActionController::TestCase
   end
 
   def test_update
-    put :update, id: @story, story: {  }
+    put :update, id: @story, story: { title: "newtitle" }
     assert_redirected_to story_path(assigns(:story))
   end
 
