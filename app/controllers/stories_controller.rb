@@ -56,6 +56,7 @@ class StoriesController < ApplicationController
     if (@story.send("can_#{params[:event]}?"))
       @story.send(params[:event])
       @story.user_id = session[:user_id]
+      @story.save
     end
     render layout: false
   end
