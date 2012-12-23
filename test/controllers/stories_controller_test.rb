@@ -48,4 +48,10 @@ class StoriesControllerTest < MiniTest::Rails::ActionController::TestCase
 
     assert_redirected_to stories_path
   end
+
+  def test_change_state
+    put :change_state, id: @story, event: "start"
+    assert_response :success
+    assert_equal "started", Story.find(@story).state
+  end
 end
