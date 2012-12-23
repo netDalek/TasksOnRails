@@ -4,7 +4,7 @@ MyApp::Application.routes.draw do
 
   resources :stories do
     member do
-      get 'change_state/:event' => :change_state
+      put 'change_state/:event' => :change_state
       resources :comments, :only => [:create]
     end
   end

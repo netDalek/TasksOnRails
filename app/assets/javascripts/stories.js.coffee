@@ -5,7 +5,11 @@
 jQuery ->
   $("body").delegate("[data-ajax]", "click", () ->
     self = $(this)
-    self.parent().load(self.data("ajax"))
+    $.ajax({
+      url: self.data("ajax"),
+      type: "PUT"
+      success: (response) -> self.parent().html(response)
+    })
   )
   $("#not_assigned").click(()->
     if ($(this).attr("checked"))
