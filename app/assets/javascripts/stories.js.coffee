@@ -8,7 +8,7 @@ jQuery ->
     $.ajax({
       url: self.data("ajax"),
       type: "PUT"
-      success: (response) -> self.parent().html(response)
+      success: (response) -> self.parents("tr").first().html(response)
     })
   )
   $("#not_assigned").click(()->

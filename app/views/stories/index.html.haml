@@ -22,8 +22,4 @@
     %th Assigned to
     %th{width:"200px"} Status
   - @stories.each do |story|
-    %tr
-      %td= link_to story.title, story_path(story)
-      %td= story.created_at_str
-      %td= story.username
-      %td{align: "center"}= render :partial => "events", :locals => {:@story => story}
+    %tr= render :partial => "story", :locals => {:@story => story}
